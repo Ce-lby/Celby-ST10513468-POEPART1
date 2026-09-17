@@ -18,6 +18,7 @@ public class PROGPART1 {
        //declarations 
        String userName = " ";
        String password;
+       String cellNum;
        
        System.out.print("Enter your username: ");
        userName = myInput.nextLine();
@@ -53,6 +54,22 @@ public class PROGPART1 {
         password = myInput.nextLine();
     }
             System.out.println("Password succesfully captured");
+            
+            
+            //promting the user to enter thier cellphone number
+            System.out.print("Enter your cellphone number: ");
+            cellNum = myInput.nextLine();
+            
+            //validate the user to enter their cellphone number
+            while (!checkCellPhoneNumber (cellNum)){
+        System.out.println("Cell phone number incorrectly formatted");
+        System.out.print("Cellphone number does not contain international code");
+        
+        System.out.print("Please re-enter your cell phone number: ");
+        cellNum = myInput.nextLine();
+        
+    }
+            System.out.print("Cell phone number successfully added");
             myInput.close();
         } 
      //a method to cherck if the condition if the username is met
@@ -88,6 +105,10 @@ public class PROGPART1 {
             //show the conditions when they're met
             return containsUpperCase && containsDigit && containsSpecialChar;
         }
+    //a method to check if the cell phone number's conditions are met
+    public static boolean checkCellPhoneNumber (String cellNum){
+        //if stateme
+    }
     }
         
     
