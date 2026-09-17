@@ -107,7 +107,11 @@ public class PROGPART1 {
         }
     //a method to check if the cell phone number's conditions are met
     public static boolean checkCellPhoneNumber (String cellNum){
-        //if stateme
+        //if statement to check the cell phones conditions
+        if (cellNum.startsWith("+27") && cellNum.length() == 12){
+            return true;
+        }
+        return false;
     }
     }
         
