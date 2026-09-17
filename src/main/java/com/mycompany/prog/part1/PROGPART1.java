@@ -19,6 +19,17 @@ public class PROGPART1 {
        String userName = " ";
        String password;
        String cellNum;
+       String firstName = " ";
+       String lastName = " ";
+       String loginPass = " ";
+       String loginUserName = " ";
+       
+       //propt the user to enter their firstname
+       System.out.print("Please enter your first name: ");
+       firstName = myInput.nextLine();
+       //prompt the user to enter their second name
+       System.out.print("Please enter your last name: ");
+       lastName = myInput.nextLine();
        
        System.out.print("Enter your username: ");
        userName = myInput.nextLine();
@@ -69,7 +80,29 @@ public class PROGPART1 {
         cellNum = myInput.nextLine();
         
     }
-            System.out.print("Cell phone number successfully added");
+            System.out.println("Cell phone number successfully added");
+            
+           //promt the user to enter their login username
+            System.out.println("Enter your username to login: ");
+            loginUserName = myInput.nextLine();
+            
+            //prompting the user to enter their login password
+            System.out.println("Enter your login password: ");
+            loginPass = myInput.nextLine();
+            
+            //validate the user to enter their login details
+            while(!loginUser (loginUserName, loginPass, userName, password)){
+                System.out.println("Username or password incorrect, please try again");
+                
+                System.out.print("Please re-enter your username to login: ");
+                loginUserName = myInput.nextLine();
+                
+                System.out.print("Please re-enter your password to login: ");
+                loginPass = myInput.nextLine();
+                break;
+            }
+            System.out.println("Welcome" + userName + ", " + lastName + "it is great to see you again");
+
             myInput.close();
         } 
      //a method to cherck if the condition if the username is met
@@ -112,8 +145,18 @@ public class PROGPART1 {
             return true;
         }
         return false;
+    } 
+    public static boolean loginUser(String loginUserName,String loginPass,String userName,String password){
+        //if statement to show if the login conditions are met
+        if (loginUserName == userName){
+            return true;
+        }else if(loginPass == password){
+            return true;
+        }else{
+            return false;
+        }
     }
-    }
+}
         
     
     
