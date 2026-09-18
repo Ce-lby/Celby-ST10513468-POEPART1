@@ -59,7 +59,7 @@ public class PROGPART1 {
         System.out.println("-Atleast eight characters");
         System.out.println("-A capital letter");
         System.out.println("-A number");
-        System.out.println("-A special charactyer");
+        System.out.println("-A special character");
         
         System.out.print("Re-enter your password: ");
         password = myInput.nextLine();
@@ -101,7 +101,7 @@ public class PROGPART1 {
                 loginPass = myInput.nextLine();
                 break;
             }
-            System.out.println("Welcome" + userName + ", " + lastName + "it is great to see you again");
+            System.out.println("Welcome " + userName + " , "  + lastName +  " it is great to see you again");
 
             myInput.close();
         } 
@@ -144,19 +144,30 @@ public class PROGPART1 {
         if (cellNum.startsWith("+27") && cellNum.length() == 12){
             return true;
         }
-        return false;
-    } 
+        return false;}
+    public static String registerUser(String userName, String password){
+        if (!checkUserName (userName)){
+            return ("User is not correctly formtted");
+            
+        }else if (!checkPasswordComplexity(password)){
+            return ("The password does not meet the complexity required");
+        }else{
+            return ("the two above conditions have been met, and the userhas been redistered successfully");
+        }
+    
+}
     public static boolean loginUser(String loginUserName,String loginPass,String userName,String password){
         //if statement to show if the login conditions are met
-        if (loginUserName == userName){
+        if (loginUserName.equals("userName") && loginPass.equals(password)){
             return true;
-        }else if(loginPass == password){
-            return true;
-        }else{
+        }else {
             return false;
         }
     }
-}
+        
+    
+    }
+
         
     
     
