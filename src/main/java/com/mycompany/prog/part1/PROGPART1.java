@@ -101,7 +101,7 @@ public class PROGPART1 {
                 loginPass = myInput.nextLine();
                 break;
             }
-            System.out.println("Welcome " + userName + " , "  + lastName +  " it is great to see you again");
+            System.out.println("Welcome " + firstName + " , "  + lastName +  " it is great to see you again");
 
             myInput.close();
         } 
@@ -144,25 +144,23 @@ public class PROGPART1 {
         if (cellNum.startsWith("+27") && cellNum.length() == 12){
             return true;
         }
-        return false;}
+        return false;
+    }
     public static String registerUser(String userName, String password){
         if (!checkUserName (userName)){
-            return ("User is not correctly formtted");
+            return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
             
         }else if (!checkPasswordComplexity(password)){
-            return ("The password does not meet the complexity required");
+            return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
         }else{
-            return ("the two above conditions have been met, and the userhas been redistered successfully");
+            return "Username and password successfully captured.";
         }
     
 }
     public static boolean loginUser(String loginUserName,String loginPass,String userName,String password){
-        //if statement to show if the login conditions are met
-        if (loginUserName.equals("userName") && loginPass.equals(password)){
-            return true;
-        }else {
-            return false;
-        }
+       //retun the correct details
+       return loginUserName.equals(userName) && loginPass.equals(password);
+        
     }
         
     
@@ -171,7 +169,7 @@ public class PROGPART1 {
         
     
     
-     
+      
     
     
     
