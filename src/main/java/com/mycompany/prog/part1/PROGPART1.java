@@ -95,6 +95,7 @@ public class PROGPART1 {
             System.out.println("Enter your login password: ");
             loginPass = myInput.nextLine();
             
+            //a method to check the users login status 
             boolean status = login.loginUser(loginUserName, loginPass);
             System.out.println(login.returnLoginStatus(status));
             
