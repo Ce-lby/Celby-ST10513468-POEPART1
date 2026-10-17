@@ -88,10 +88,7 @@ public class Login {
     public boolean loginUser(String loginUserName,
                              String loginPass) {
 
-        return registeredUserName != null
-                && registeredPassword != null
-                && loginUserName.equals(registeredUserName)
-                && loginPass.equals(registeredPassword);
+        return registeredUserName != null && registeredPassword != null && loginUserName.equals(registeredUserName) && loginPass.equals(registeredPassword);
     }
 
     // Method to return the login status message
