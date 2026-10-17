@@ -24,6 +24,8 @@ public class PROGPART1 {
        String loginPass = " ";
        String loginUserName = " ";
        
+       
+       
        //propt the user to enter their firstname
        System.out.print("Please enter your first name: ");
        firstName = myInput.nextLine();
@@ -31,10 +33,12 @@ public class PROGPART1 {
        System.out.print("Please enter your last name: ");
        lastName = myInput.nextLine();
        
+       Login login = new Login(firstName, lastName);
+       
        System.out.print("Enter your username: ");
        userName = myInput.nextLine();
        //prompting the user to enter their user name
-       while (!checkUserName (userName))
+       while (!login.checkUserName (userName))
        {
                System.out.println("Username successfully captured");
                System.out.println("User name not correctly formatted");
@@ -53,7 +57,7 @@ public class PROGPART1 {
             password = myInput.nextLine();
             
             //prompt the user to enter their passwords
-        while (!checkPasswordComplexity (password)){
+        while (!login.checkPasswordComplexity (password)){
         System.out.println("Passwrod is not correctly formatted ");
         System.out.println("Please ensure that the password contains:");
         System.out.println("-Atleast eight characters");
@@ -72,7 +76,7 @@ public class PROGPART1 {
             cellNum = myInput.nextLine();
             
             //validate the user to enter their cellphone number
-            while (!checkCellPhoneNumber (cellNum)){
+            while (!login.checkCellPhoneNumber (cellNum)){
         System.out.println("Cell phone number incorrectly formatted");
         System.out.print("Cellphone number does not contain international code");
         
@@ -82,6 +86,7 @@ public class PROGPART1 {
     }
             System.out.println("Cell phone number successfully added");
             
+            
            //promt the user to enter their login username
             System.out.println("Enter your username to login: ");
             loginUserName = myInput.nextLine();
@@ -90,79 +95,13 @@ public class PROGPART1 {
             System.out.println("Enter your login password: ");
             loginPass = myInput.nextLine();
             
-            //validate the user to enter their login details
-            while(!loginUser (loginUserName, loginPass, userName, password)){
-                System.out.println("Username or password incorrect, please try again");
-                
-                System.out.print("Please re-enter your username to login: ");
-                loginUserName = myInput.nextLine();
-                
-                System.out.print("Please re-enter your password to login: ");
-                loginPass = myInput.nextLine();
-                break;
-            }
-            System.out.println("Welcome " + firstName + " , "  + lastName +  " it is great to see you again");
-
+            boolean status = login.loginUser(loginUserName, loginPass);
+            System.out.println(login.returnLoginStatus(status));
+            
             myInput.close();
-        } 
-     //a method to cherck if the condition if the username is met
-    public static boolean checkUserName (String userName){
-        //check if the the username meets all the conditions required of the user to enter
-            return userName.length() <= 5 && userName.contains("_");
             
-            
-        }
-    //A method to check the passwords complexity
-    public static boolean checkPasswordComplexity(String password){
-        //declarations
-        boolean containsUpperCase = false;
-        boolean containsDigit = false;
-        boolean containsSpecialChar = false;
-        
-        //if statement to check for the length of the password
-        if (password.length() < 8 ){
-            return false;
-        }
-        //for loop to check the characters 
-        for(int i = 0; i < password.length(); i++){
-            char character = password.charAt(i);
-            
-            if (Character.isUpperCase(character)){
-                containsUpperCase = true;
-            }else if(Character.isDigit(character)){
-                containsDigit = true;
-            }else if(!Character.isLetterOrDigit(character)){
-                containsSpecialChar = true;
-            }
-            }
-            //show the conditions when they're met
-            return containsUpperCase && containsDigit && containsSpecialChar;
-        }
-    //a method to check if the cell phone number's conditions are met
-    public static boolean checkCellPhoneNumber (String cellNum){
-        //if statement to check the cell phones conditions
-        if (cellNum.startsWith("+27") && cellNum.length() == 12){
-            return true;
-        }
-        return false;
     }
-    public static String registerUser(String userName, String password){
-        if (!checkUserName (userName)){
-            return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
-            
-        }else if (!checkPasswordComplexity(password)){
-            return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
-        }else{
-            return "Username and password successfully captured.";
-        }
-    
-}
-    public static boolean loginUser(String loginUserName,String loginPass,String userName,String password){
-       //retun the correct details
-       return loginUserName.equals(userName) && loginPass.equals(password);
-        
-    }
-        
+     
     
     }
 
