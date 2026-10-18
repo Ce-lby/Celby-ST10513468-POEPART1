@@ -97,14 +97,68 @@ public class PROGPART1 {
             
             //a method to check the users login status 
             boolean status = login.loginUser(loginUserName, loginPass);
-            System.out.println(login.returnLoginStatus(status));
-            
-            myInput.close();
-            
-    }
-     
+            if (status){
+                System.out.println("Welcome" + firstName + " " + lastName + " , it is great to see you again");
+            }else {
+                System.out.println("Login failed. Please try again");
+            }   
+             
+        }
+    //QuickChat
     
-    }
+    //decalrations 
+    String Message;
+    public static void runQuickChat(Scanner myInput){
+        System.out.println("Welcome to QuickChat");
+        
+        System.out.print("How many messages would you like to enter? ");
+        int numMessages = myInput.nextInt();
+        
+        List <Message> messages = new ArrayList<>();
+        
+        boolean running = true;
+        while (running){
+            System.out.println("Choose an option: ");
+            System.out.println("1) Send Messages");
+            System.out.println("2) Show recently sent messages");
+            System.out.println("3) Quit");
+            
+            int choice = myInput.nextInt();
+            
+            switch (choice) {
+                case 1: 
+                    for (int i = 0; i < numMessages; i++) {
+                        System.out.println("Enter the recipients cell number: ");
+                        String recipient = myInput.nextLine();
+                        
+                        System.out.println("Enter your message: ");
+                        String txtMessage = myInput.nextLine();
+                        
+                        Message msg = new Message(recipient, txtMessage, i + 1);
+                        System.out.print(msg.SentMessage(myInput));
+                        messages.add(msg);
+                        System.out.println(msg.printMessages());
+                    }
+                    System.out.println("Total messages sent: " + Message.retunTotalMessages());
+                    break;
+                    
+                case 2:
+                    System.out.println("Coming Soon.");
+                    break;
+                    
+                case 3:
+                    running = false;
+                    System.out.println("Exiting QuickChat...");
+                    break;
+                    
+                default :
+                    System.out.println("Invalid choice. Try again");
+            }
+        }
+    } 
+}
+    
+    
 
         
     
@@ -125,5 +179,3 @@ public class PROGPART1 {
 
        
          
-
-
