@@ -70,6 +70,9 @@ public class PROGPART1 {
     }
             System.out.println("Password succesfully captured");
             
+            //register user credentials
+            login.registerUser(userName, password);
+            
             
             //promting the user to enter thier cellphone number
             System.out.print("Enter your cellphone number: ");
@@ -86,7 +89,7 @@ public class PROGPART1 {
     }
             System.out.println("Cell phone number successfully added");
             
-            
+            //Login
            //promt the user to enter their login username
             System.out.println("Enter your username to login: ");
             loginUserName = myInput.nextLine();
@@ -102,60 +105,86 @@ public class PROGPART1 {
             }else {
                 System.out.println("Login failed. Please try again");
             }   
-             
-        }
-    //QuickChat
-    
-    //decalrations 
-    String Message;
-    public static void runQuickChat(Scanner myInput){
-        System.out.println("Welcome to QuickChat");
-        
-        System.out.print("How many messages would you like to enter? ");
-        int numMessages = myInput.nextInt();
-        
-        List <Message> messages = new ArrayList<>();
-        
-        boolean running = true;
-        while (running){
-            System.out.println("Choose an option: ");
-            System.out.println("1) Send Messages");
-            System.out.println("2) Show recently sent messages");
-            System.out.println("3) Quit");
-            
-            int choice = myInput.nextInt();
-            
-            switch (choice) {
-                case 1: 
-                    for (int i = 0; i < numMessages; i++) {
-                        System.out.println("Enter the recipients cell number: ");
-                        String recipient = myInput.nextLine();
-                        
-                        System.out.println("Enter your message: ");
-                        String txtMessage = myInput.nextLine();
-                        
-                        Message msg = new Message(recipient, txtMessage, i + 1);
-                        System.out.print(msg.SentMessage(myInput));
-                        messages.add(msg);
-                        System.out.println(msg.printMessages());
+            //QuickChat
+            if (status) {
+                System.out.print("Welcome to QuickChat.");
+                
+                boolean keepRunning = true;
+                int totalMessagesSent = 0;
+                
+                while (keepRunning) {
+                    System.out.println("Please choose an option from the menu: ");
+                    System.out.println("1) Send Messages");
+                    System.out.println("2) Show recently sent messages");
+                    System.out.println("3) Quit");
+                    System.out.println("Enter your choice (1-3 or 'quit'): ");
+                    
+                    String menuChoice = myInput.nextLine().trim();
+                    
+                    if (menuChoice.equalsIgnoreCase("quit") || menuChoice.equals("3")) {
+                        System.out.println("Exiting QuickChat. Total messages processed: " + totalMessagesSent);
+                        keepRunning = false;
+                        break;
                     }
-                    System.out.println("Total messages sent: " + Message.retunTotalMessages());
-                    break;
                     
-                case 2:
-                    System.out.println("Coming Soon.");
-                    break;
-                    
-                case 3:
-                    running = false;
-                    System.out.println("Exiting QuickChat...");
-                    break;
-                    
-                default :
-                    System.out.println("Invalid choice. Try again");
+                    switch (menuChoice) {
+                        case "1":
+                            System.out.print("How many messages do you wish ro enter? ");
+                            int numMessages = myInput.nextInt();
+                            myInput.nextLine();
+                            
+                            for (int i = 0; i < numMessages; i++){
+                                System.out.println("Enter Message" + (i + 1) + "of" + numMessages + "---");
+                                
+                                System.out.print("Enter recipient cell number: ");
+                                String recipient = myInput.nextLine();
+                                
+                                System.out.print("Enter your message (max 250 characters): ");
+                                String messageText = myInput.nextLine();
+                                
+                                Messages msg = new Messages(i, recipient, messageText);
+                                
+                                //message length
+                                if (!msg.checkMessageLength()){
+                                    System.out.println("Please enter a message of less than 250 characters.");
+                                    return;
+                                }
+                                //message action
+                                System.out.println("Select an action for this message");
+                                System.out.println("1) Send Message");
+                                System.out.println("0) Disregard Message");
+                                System.out.println("2) Store Message to send later");
+                                System.out.print("Choice: ");
+                                String action = myInput.nextLine().trim();
+                                
+                                String resultMessage = msg.SentMessage(action);
+                                System.out.println(resultMessage);
+                                
+                                if (action.equals("1")){
+                                    totalMessagesSent++;
+                                    System.out.println(msg.printMessages());
+                                    
+                                }else if (action.equals("2")) {
+                                    System.out.println("JSON Record:" + msg.storeMessage());
+                                }
+                            }
+                            System.out.println("Total messages successfully sent: " + totalMessagesSent);
+                            break;
+                            
+                        case "2":
+                            System.out.println("Coming Soon.");
+                            break;
+                            
+                        default:
+                            System.out.println("Invalid option. Please select 1, 2, or 3");
+                    }
+                }
+            }else {
+                System.out.println("Access Denied. You must login successfully to QuickChat.");
             }
+            myInput.close();
         }
-    } 
+    
 }
     
     
